@@ -12,6 +12,8 @@ import { Status } from './types/Status';
 
 enum ErrorMessage {
   LOAD_TODOS = 'Unable to load todos',
+  ADD_TODO = 'Unable to add a todo',
+  DELETE_TODO = 'Unable to delete a todo',
 }
 
 export const App: React.FC = () => {
@@ -51,7 +53,7 @@ export const App: React.FC = () => {
         setTodos(current => [...current, newTodo]);
       })
       .catch(error => {
-        setErrorMessage('Unable to add a todo');
+        setErrorMessage(ErrorMessage.ADD_TODO);
 
         throw error;
       })
@@ -66,7 +68,7 @@ export const App: React.FC = () => {
         setTodos(current => current.filter(todo => todo.id !== id));
       })
       .catch(() => {
-        setErrorMessage('Unable to delete a todo');
+        setErrorMessage(ErrorMessage.DELETE_TODO);
       })
       .finally(() => {
         setDeleteOnTodo(current => current.filter(item => item !== id));
@@ -97,6 +99,7 @@ export const App: React.FC = () => {
     return <UserWarning />;
   }
 
+
   return (
     <div className="todoapp">
       <h1 className="todoapp__title">todos</h1>
@@ -124,12 +127,7 @@ export const App: React.FC = () => {
                   isLoading={deleteOnTodo.includes(todo.id)}
                 />
               ))}
-              {tempTodo && (
-                <TodoItem
-                  todo={tempTodo}
-                  isLoading
-                />
-              )}
+              {tempTodo && <TodoItem todo={tempTodo} isLoading />}
             </section>
 
             {todos.length > 0 && (

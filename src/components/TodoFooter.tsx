@@ -1,4 +1,4 @@
-import classNames from 'classnames';
+import cn from 'classnames';
 import React from 'react';
 import { Todo } from '../types/Todo';
 import { Status } from '../types/Status';
@@ -41,7 +41,7 @@ export const TodoFooter: React.FC<Props> = ({
           <a
             key={link.path}
             href={`#/${link.path}`}
-            className={classNames('filter__link', {
+            className={cn('filter__link', {
               selected: link.path === selectedFilter,
             })}
             data-cy={link.cy}

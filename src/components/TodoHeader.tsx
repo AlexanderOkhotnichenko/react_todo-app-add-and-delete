@@ -1,4 +1,4 @@
-import classNames from 'classnames';
+import cn from 'classnames';
 import React, { useEffect, useState } from 'react';
 import { Todo } from '../types/Todo';
 
@@ -9,7 +9,14 @@ type Props = {
   onFocus: React.RefObject<HTMLInputElement>;
 };
 
-export const TodoHeader: React.FC<Props> = ({ todos, onError, onSubmit, onFocus }) => {
+const EMPTY_TITLE_ERROR = 'Title should not be empty';
+
+export const TodoHeader: React.FC<Props> = ({
+  todos,
+  onError,
+  onSubmit,
+  onFocus,
+}) => {
   const [title, setTitle] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -24,7 +31,7 @@ export const TodoHeader: React.FC<Props> = ({ todos, onError, onSubmit, onFocus 
     event.preventDefault();
 
     if (!title.trim()) {
-      onError('Title should not be empty');
+      onError(EMPTY_TITLE_ERROR);
 
       return;
     }
@@ -42,7 +49,7 @@ export const TodoHeader: React.FC<Props> = ({ todos, onError, onSubmit, onFocus 
       <header className="todoapp__header">
         <button
           type="button"
-          className={classNames('todoapp__toggle-all', {
+          className={cn('todoapp__toggle-all', {
             active: isAllCompleted,
           })}
           data-cy="ToggleAllButton"

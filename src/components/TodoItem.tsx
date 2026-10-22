@@ -1,6 +1,6 @@
 import React from 'react';
 import { Todo } from '../types/Todo';
-import classNames from 'classnames';
+import cn from 'classnames';
 
 type Props = {
   todo: Todo;
@@ -12,7 +12,7 @@ export const TodoItem: React.FC<Props> = ({ todo, isLoading, onDelete }) => {
   return (
     <div
       data-cy="Todo"
-      className={classNames('todo', {
+      className={cn('todo', {
         completed: todo.completed,
       })}
     >
@@ -33,13 +33,18 @@ export const TodoItem: React.FC<Props> = ({ todo, isLoading, onDelete }) => {
       </span>
 
       {/* Remove button appears only on hover */}
-      <button type="button" className="todo__remove" data-cy="TodoDelete" onClick={() => onDelete?.(todo.id)}>
+      <button
+        type="button"
+        className="todo__remove"
+        data-cy="TodoDelete"
+        onClick={() => onDelete?.(todo.id)}
+      >
         ×
       </button>
 
       <div
         data-cy="TodoLoader"
-        className={classNames('modal overlay', {
+        className={cn('modal overlay', {
           'is-active': isLoading,
         })}
       >

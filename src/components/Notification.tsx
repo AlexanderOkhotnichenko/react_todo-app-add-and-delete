@@ -1,4 +1,4 @@
-import classNames from 'classnames';
+import cn from 'classnames';
 import React from 'react';
 
 type Props = {
@@ -10,7 +10,7 @@ export const Notification: React.FC<Props> = ({ errorMessage, onClose }) => {
   return (
     <div
       data-cy="ErrorNotification"
-      className={classNames(
+      className={cn(
         'notification is-danger is-light has-text-weight-normal',
         {
           hidden: !errorMessage,
